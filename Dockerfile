@@ -27,7 +27,9 @@ ARG APP_KEY=base64:AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=
 ARG DB_CONNECTION=sqlite
 ARG DB_DATABASE=:memory:
 
-RUN php artisan package:discover --ansi
+RUN mkdir -p bootstrap/cache storage/framework/views storage/framework/cache storage/framework/sessions storage/logs \
+ && chmod -R 775 bootstrap/cache storage \
+ && php artisan package:discover --ansi
 
 RUN chmod +x docker-entrypoint.sh
 
